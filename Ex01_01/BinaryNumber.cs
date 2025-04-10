@@ -6,23 +6,38 @@ namespace Ex01_01
     {
         private string m_BinaryNumberString;
         private int m_QuantityOfBits;
-        public int ConvertToDecimal()
+        private int m_DecimalValue;
+
+        private bool checkAndUpdateLegnthOfLongestOnesSequence(int i_CurrentLegnthOfLongestOnesSequence, ref int io_TotalLegnthOfLongestOnesSequence)
         {
-            int decimalRepresentationOfBinaryNumber = 0;
+            bool awnser = false;
+            if (i_CurrentLegnthOfLongestOnesSequence > io_TotalLegnthOfLongestOnesSequence)
+            {
+                io_TotalLegnthOfLongestOnesSequence = i_CurrentLegnthOfLongestOnesSequence;
+                awnser = true;
+            }
+            return awnser;
+        }
+        
+        private void assignDecimalValue()
+        {
+            int power = 0;
+
             for (int i = 0; i < m_QuantityOfBits; i++)
             {
-                if (m_BinaryNumberString[i] != 0)
+                power = m_QuantityOfBits - i - 1;
+                if (m_BinaryNumberString[i] != '0')
                 {
-                    decimalRepresentationOfBinaryNumber += (int)Math.Pow(2,i);
+                    m_DecimalValue += (int)Math.Pow(2, power);
                 }
             }
-            return decimalRepresentationOfBinaryNumber;
         }
         public static BinaryNumber Parse(string i_BinaryNumberString)
         {
             BinaryNumber newBinaryNumber = new BinaryNumber();
             newBinaryNumber.m_BinaryNumberString = i_BinaryNumberString;
             newBinaryNumber.m_QuantityOfBits = i_BinaryNumberString.Length;
+            newBinaryNumber.assignDecimalValue();
 
             return newBinaryNumber;
         }
@@ -33,49 +48,83 @@ namespace Ex01_01
             int currentLegnthOfLongestOnesSequence = 0;
             int previousDigit = -1;
             int currentDigit;
-            for(currentDigit = 0; currentDigit < m_QuantityOfBits; currentDigit++)
+            int leastSignificantBit = m_QuantityOfBits - 1;
+
+            for(int i = 0; i < m_QuantityOfBits; i++)
             {
-                if(m_BinaryNumberString[currentDigit] == '1')
+                if(m_BinaryNumberString[i] == '1')
                 {
                     currentDigit = 1;
                     currentLegnthOfLongestOnesSequence++;
+                    if(previousDigit == 1 && i == leastSignificantBit)
+                    {
+                        checkAndUpdateLegnthOfLongestOnesSequence(currentLegnthOfLongestOnesSequence, ref totalLegnthOfLongestOnesSequence);
+                        currentLegnthOfLongestOnesSequence = 0;
+                    }
                 }
                 else
                 {
                     currentDigit = 0;
-                    if(previousDigit == 1 && currentDigit == 0)
+                    if(previousDigit == 1)
                     {
-                        if(currentLegnthOfLongestOnesSequence > totalLegnthOfLongestOnesSequence)
-                        {
-                            totalLegnthOfLongestOnesSequence = currentLegnthOfLongestOnesSequence;
-                        }
-                        currentLegnthOfLongestOnesSequence = 0;
+                        checkAndUpdateLegnthOfLongestOnesSequence(currentLegnthOfLongestOnesSequence, ref totalLegnthOfLongestOnesSequence);
                     }
 
                     currentLegnthOfLongestOnesSequence = 0;
                 }
                 previousDigit = currentDigit;
-                currentDigit++;
             }
             return totalLegnthOfLongestOnesSequence;
         }
-
-        public int StringToInt(string i_BinaryNumberString)
+        public int GetQuantityOfOnesInNumber()
         {
-            int intBinaryNumber = 0;
-            int mostSignificantBitIndex = m_QuantityOfBits - 1;
+            int quantityOfOnes = 0;
 
-            for (int i = 0; i < m_QuantityOfBits; i++)
+            for(int i = 0; i < m_QuantityOfBits; i++)
             {
-                if (i_BinaryNumberString[i] == '1')
+                if (m_BinaryNumberString[i] == '1')
                 {
-                    intBinaryNumber += (int)Math.Pow(10, mostSignificantBitIndex);
+                    quantityOfOnes++;
                 }
-                mostSignificantBitIndex--;
             }
 
-            return intBinaryNumber;
+            return quantityOfOnes;
+        }
 
+        public int GetQuantityOfExchangesBetweenZeroesAndOnes()
+        {
+            int quantityOfExchangesBetweenZeroesAndOnes = 0;
+            int currentDigit; //change digit to bit
+            int prevDigit = -1;
+            for(int i = 0; i < m_QuantityOfBits; i++)
+            {
+                if (m_BinaryNumberString[i] == '1')
+                {
+                    currentDigit = 1;
+                    if(prevDigit == 0)
+                    {
+                        quantityOfExchangesBetweenZeroesAndOnes++;
+                    }
+                }
+                else
+                {
+                    currentDigit = 0;
+                    if (prevDigit == 1)
+                    {
+                        quantityOfExchangesBetweenZeroesAndOnes++;
+                    }
+                }
+                prevDigit = currentDigit;
+            }
+            return quantityOfExchangesBetweenZeroesAndOnes;
+        }
+        public int DecimalValue()
+        {
+            return m_DecimalValue;
+        }
+        public string ToString()
+        {
+            return m_BinaryNumberString;
         }
     }
 }
