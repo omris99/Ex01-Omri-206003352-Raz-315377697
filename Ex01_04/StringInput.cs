@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Runtime.CompilerServices;
-
 namespace Ex01_04
 {
     public class StringInput
@@ -8,10 +6,14 @@ namespace Ex01_04
         private string m_Input;
         private int k_StringLength = 12;
 
-        public void AskUserForInput()
+        private bool checkInputLengthValidation()
         {
-            Console.WriteLine("Hello, Please Enter a string with exactly {0} characters: ", k_StringLength);
-            m_Input = Console.ReadLine();
+            bool inputIsValid = true;
+            if(m_Input.Length != k_StringLength)
+            {
+                inputIsValid = false;
+            }
+            return inputIsValid;
         }
 
         private bool checkIfPalindrome(int leftCharIndex, int rightCharIndex)
@@ -111,6 +113,19 @@ namespace Ex01_04
                 }
             }
             Console.WriteLine("String characters are in ascending lexicography order: {0}", areStringCharactersInAscendingLexicographyOrder);
+        }
+
+        public void AskUserForInput()
+        {
+            Console.WriteLine("Hello, Please Enter a string with exactly {0} characters: ", k_StringLength);
+            m_Input = Console.ReadLine();
+
+            while (checkInputLengthValidation() == false)
+            {
+                Console.WriteLine("Error, Try Again.");
+                m_Input = Console.ReadLine();
+            }
+
         }
         public void PrintData()
         {

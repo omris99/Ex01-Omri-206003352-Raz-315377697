@@ -10,7 +10,8 @@ namespace Ex01_01
         public static void Main()
         {
             BinaryNumbersGroup binaryNumbersInput = new BinaryNumbersGroup();
-            binaryNumbersInput.GetBinaryNumbersFromUserAndPrintNumbersInDescendingOrderAndStatistics();
+            binaryNumbersInput.GetInputFromUser();
+            binaryNumbersInput.PrintNumbersInDescendingOrderAndStatistics();
         }
     }
 }

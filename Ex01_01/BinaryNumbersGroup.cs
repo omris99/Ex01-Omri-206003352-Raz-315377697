@@ -6,18 +6,33 @@ namespace Ex01_01
     {
         private BinaryNumber[] m_BinaryNumbersGroup = new BinaryNumber[k_GroupSize];
         private const int k_GroupSize = 4;
+        private const int k_NumberLength = 7;
 
-        private void getInputFromUser()
+        private bool checkInputValidation(string input)
+        {
+            bool validation = true;
+            if(input.Length != k_NumberLength)
+            {
+                validation = false;
+            }
+            else if()
+        }
+        public void GetInputFromUser()
         {
             string inputRequest = String.Format("Hello, please enter {0} Binary Numbers.", k_GroupSize);
             Console.WriteLine(inputRequest);
             for(int i = 0; i < k_GroupSize; i++)
             {
                 string binaryNumberString = Console.ReadLine();
+                while(checkInputValidation() == false)
+                {
+                    Console.WriteLine("Error! Try again.");
+                    binConsole.ReadLine();
+                }
                 m_BinaryNumbersGroup[i] = BinaryNumber.Parse(binaryNumberString);
             }
         }
-        private void PrintNumbersInDescendingOrder()
+        private void printNumbersInDescendingOrder()
         {
             sortInDescendingOrderBinaryNumbersGroup();
 
@@ -138,10 +153,9 @@ namespace Ex01_01
             m_BinaryNumbersGroup[i_FirstNumber] = m_BinaryNumbersGroup[i_SecondNumber];
             m_BinaryNumbersGroup[i_SecondNumber] = temporaryBinaryNumber;
         }
-        public void GetBinaryNumbersFromUserAndPrintNumbersInDescendingOrderAndStatistics()
+        public void PrintNumbersInDescendingOrderAndStatistics()
         {
-            getInputFromUser();
-            PrintNumbersInDescendingOrder();
+            printNumbersInDescendingOrder();
             printStatistics();
             return;
         }
