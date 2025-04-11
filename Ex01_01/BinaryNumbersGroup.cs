@@ -8,14 +8,32 @@ namespace Ex01_01
         private const int k_GroupSize = 4;
         private const int k_NumberLength = 7;
 
-        private bool checkInputValidation(string input)
+        private bool checkIfAllDigitsInNumberAreBinary(string i_Input)
+        {
+            bool digitsInNumberAreBinary = true;
+
+            for(int i = 0; i < i_Input.Length; i++)
+            {
+                if (i_Input[i] != '0' && i_Input[i] != '1')
+                {
+                    digitsInNumberAreBinary = false;
+                }
+            }
+            return digitsInNumberAreBinary;
+        }
+        private bool checkInputValidation(string i_Input)
         {
             bool validation = true;
-            if(input.Length != k_NumberLength)
+
+            if(i_Input.Length != k_NumberLength)
             {
                 validation = false;
             }
-            else if()
+            else if(checkIfAllDigitsInNumberAreBinary(i_Input) == false)
+            {
+                validation = false;
+            }
+            return validation;
         }
         public void GetInputFromUser()
         {
@@ -24,10 +42,10 @@ namespace Ex01_01
             for(int i = 0; i < k_GroupSize; i++)
             {
                 string binaryNumberString = Console.ReadLine();
-                while(checkInputValidation() == false)
+                while(checkInputValidation(binaryNumberString) == false)
                 {
                     Console.WriteLine("Error! Try again.");
-                    binConsole.ReadLine();
+                    binaryNumberString = Console.ReadLine();
                 }
                 m_BinaryNumbersGroup[i] = BinaryNumber.Parse(binaryNumberString);
             }
