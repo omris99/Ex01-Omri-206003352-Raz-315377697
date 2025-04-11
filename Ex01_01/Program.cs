@@ -7,7 +7,7 @@ namespace Ex01_01
 {
     class Program
     {
-        static void Main()
+        public static void Main()
         {
             BinaryNumbersGroup binaryNumbersInput = new BinaryNumbersGroup();
             binaryNumbersInput.GetBinaryNumbersFromUserAndPrintNumbersInDescendingOrderAndStatistics();
