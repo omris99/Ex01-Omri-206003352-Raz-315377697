@@ -1,42 +1,39 @@
 ﻿using System;
+using System.Text;
 namespace Ex01_02
 {
     public class TreePrinter
     {
-        private int m_Currentnumber = 1;
-        private static readonly int[] sr_LineLengths = { 1, 3, 5, 7, 9 };
-        private const int k_ManLineLength = 9;
+        private int m_CurrentNumber = 1;
+        private const int k_NumOfSpacesBetweenLabelAndNumbers = 3;
+        public void PrintTree(int i_Height)
+        {
+            int treePartHeight = i_Height - 2;
+            int maxRowLength = 2 * (treePartHeight - 1) + 1;
 
-        public void PrintTree() 
-        {
-            PrintLineRecursive(0);
-            PrintTrunk('F');
-            PrintTrunk('G');
+            printLineRecursive(0, treePartHeight, maxRowLength);
+            printTrunk((char)('A' + treePartHeight), maxRowLength);
+            printTrunk((char)('A' + treePartHeight + 1), maxRowLength);
         }
-        private void PrintLineRecursive(int i_Index)
+        private void printLineRecursive(int i_RowIndex, int i_TotalRows, int i_MaxRowLength)
         {
-            if (i_Index >= sr_LineLengths.Length)
+            if (i_RowIndex >= i_TotalRows)
             {
                 return;
             }
-
-            int lineLength = sr_LineLengths[i_Index];
-            int paddingSpaces = (k_ManLineLength - lineLength);
-            char label = (char)('A' + i_Index);
-
-            string numbersRow = TreeRowFormatter.BuildRowString(lineLength, ref m_Currentnumber);
-            string formattedRow = string.Format("{0}{1}{2}\n", label, new string(' ', paddingSpaces + 1), numbersRow);
-
+            int rowLength = 2 * i_RowIndex + 1;
+            int numOfPaddingSpacesForNumbers = i_MaxRowLength - rowLength;
+            char label = (char)('A' + i_RowIndex);
+            string numbersRow = TreeRowFormatter.BuildRowString(rowLength, ref m_CurrentNumber);
+            string formattedRow = string.Format("{0}{1}{2}\n", label, new string(' ', numOfPaddingSpacesForNumbers + k_NumOfSpacesBetweenLabelAndNumbers + 1), numbersRow);
             Console.WriteLine(formattedRow);
-
-            PrintLineRecursive(i_Index + 1);
+            printLineRecursive(i_RowIndex + 1, i_TotalRows, i_MaxRowLength);
         }
-        private void PrintTrunk(char i_Label) 
+        private void printTrunk(char i_Label, int i_MaxRowLength)
         {
-            int paddingSpaces = (k_ManLineLength - 2);
-            string trunkRow = string.Format("{0}{1}|8|\n", i_Label, new string(' ', paddingSpaces + 1));
-            
-            Console.WriteLine(trunkRow);
+            int numOfPaddingSpacesForTrunk = i_MaxRowLength - 1;
+            string trunk = string.Format("{0}{1}|{2}|\n", i_Label, new string(' ', numOfPaddingSpacesForTrunk + k_NumOfSpacesBetweenLabelAndNumbers), m_CurrentNumber);
+            Console.WriteLine(trunk);
         }
     }
 }
