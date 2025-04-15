@@ -1,5 +1,4 @@
 ﻿using System;
-
 namespace Ex01_02
 {
     public class Program
@@ -7,7 +6,7 @@ namespace Ex01_02
         public static void Main()
         {
             TreePrinter treePrinter = new TreePrinter();
-            treePrinter.PrintTree();
+            treePrinter.PrintTree(5);
         }
     }
 }
