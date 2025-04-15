@@ -6,18 +6,51 @@ namespace Ex01_01
     {
         private BinaryNumber[] m_BinaryNumbersGroup = new BinaryNumber[k_GroupSize];
         private const int k_GroupSize = 4;
+        private const int k_NumberLength = 7;
 
-        private void getInputFromUser()
+        private bool checkIfAllDigitsInNumberAreBinary(string i_Input)
+        {
+            bool digitsInNumberAreBinary = true;
+
+            for(int i = 0; i < i_Input.Length; i++)
+            {
+                if (i_Input[i] != '0' && i_Input[i] != '1')
+                {
+                    digitsInNumberAreBinary = false;
+                }
+            }
+            return digitsInNumberAreBinary;
+        }
+        private bool checkInputValidation(string i_Input)
+        {
+            bool validation = true;
+
+            if(i_Input.Length != k_NumberLength)
+            {
+                validation = false;
+            }
+            else if(checkIfAllDigitsInNumberAreBinary(i_Input) == false)
+            {
+                validation = false;
+            }
+            return validation;
+        }
+        public void GetInputFromUser()
         {
             string inputRequest = String.Format("Hello, please enter {0} Binary Numbers.", k_GroupSize);
             Console.WriteLine(inputRequest);
             for(int i = 0; i < k_GroupSize; i++)
             {
                 string binaryNumberString = Console.ReadLine();
+                while(checkInputValidation(binaryNumberString) == false)
+                {
+                    Console.WriteLine("Error! Try again.");
+                    binaryNumberString = Console.ReadLine();
+                }
                 m_BinaryNumbersGroup[i] = BinaryNumber.Parse(binaryNumberString);
             }
         }
-        private void PrintNumbersInDescendingOrder()
+        private void printNumbersInDescendingOrder()
         {
             sortInDescendingOrderBinaryNumbersGroup();
 
@@ -138,10 +171,9 @@ namespace Ex01_01
             m_BinaryNumbersGroup[i_FirstNumber] = m_BinaryNumbersGroup[i_SecondNumber];
             m_BinaryNumbersGroup[i_SecondNumber] = temporaryBinaryNumber;
         }
-        public void GetBinaryNumbersFromUserAndPrintNumbersInDescendingOrderAndStatistics()
+        public void PrintNumbersInDescendingOrderAndStatistics()
         {
-            getInputFromUser();
-            PrintNumbersInDescendingOrder();
+            printNumbersInDescendingOrder();
             printStatistics();
             return;
         }
