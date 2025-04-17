@@ -1,4 +1,6 @@
 ﻿using System;
+using Utilities;
+
 namespace Ex01_04
 {
     public class StringInput
@@ -70,14 +72,8 @@ namespace Ex01_04
         }
         private void checkAndPrintIfNumberDividesByThreeWithoutRemainder()
         {
-            long number = long.Parse(m_Input);
-
-            bool isNumberDivideByThreeWithoutRemainder = true;
-
-            if (number % 3 != 0)
-            {
-                isNumberDivideByThreeWithoutRemainder = false;
-            }
+            NumbersFeatures.CheckIfNumberDividesByThreeWithoutRemainder(long.Parse(m_Input));
+            bool isNumberDivideByThreeWithoutRemainder = NumbersFeatures.CheckIfNumberDividesByThreeWithoutRemainder(long.Parse(m_Input));
 
             Console.WriteLine("Number Divides by 3 without remainder: {0}", isNumberDivideByThreeWithoutRemainder);
         }
