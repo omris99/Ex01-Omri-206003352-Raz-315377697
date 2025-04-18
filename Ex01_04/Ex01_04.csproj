@@ -37,7 +37,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />
-    <Compile Include="StringInput.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Utilities">

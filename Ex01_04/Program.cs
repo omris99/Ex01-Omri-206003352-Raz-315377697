@@ -8,7 +8,7 @@ namespace Ex01_04
     public class Program
     {
         private string m_Input;
-        private int k_StringLength = 12;
+        private int k_StringLength = 4;
         public static void Main()
         {
             Program program = new Program();
