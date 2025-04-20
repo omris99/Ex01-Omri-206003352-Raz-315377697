@@ -118,26 +118,94 @@ public class Program
 
     public void checkAndPrintMostFrequentDigitAndItsCount()
     {
-        int[] digitsCountArray = new int[10];
         int number = m_Number;
-        int mostFrequentDigit = 0;
-        int biggestCountOfAppearancesRecorded = 0;
-        int currentDigit;
+        int mostFrequentDigit;
+        int biggestCountOfAppearancesRecorded;
 
+        checkMostFrequentDigitAndItsCount(out mostFrequentDigit, out biggestCountOfAppearancesRecorded);
+        Console.WriteLine("- Most Frequent Digit: {0} | Times counted: {1}", mostFrequentDigit, biggestCountOfAppearancesRecorded);
+    }
+
+    private void checkMostFrequentDigitAndItsCount(out int o_MostFrequentDigit, out int o_BiggestCountOfAppearancesRecorded)
+    {
+        int currentDigit;
+        int currentDigitCount = 0;
+        int number = m_Number;
+        int digitZeroCount = 0;
+        int digitOneCount = 0;
+        int digitTwoCount = 0;
+        int digitThreeCount = 0;
+        int digitFourCount = 0;
+        int digitFiveCount = 0;
+        int digitSixCount = 0;
+        int digitSevenCount = 0;
+        int digitEightCount = 0;
+        int digitNineCount = 0;
+
+        o_BiggestCountOfAppearancesRecorded = 0;
+        o_MostFrequentDigit = 0;
         while(number > 0)
         {
             currentDigit = number % 10;
-            digitsCountArray[currentDigit]++;
-            if(digitsCountArray[currentDigit] > biggestCountOfAppearancesRecorded)
+            if(currentDigit == 0)
             {
-                biggestCountOfAppearancesRecorded = digitsCountArray[currentDigit];
-                mostFrequentDigit = currentDigit;
+                digitZeroCount++;
+                currentDigitCount = digitZeroCount;
+            }
+            else if(currentDigit == 1)
+            {
+                digitOneCount++;
+                currentDigitCount = digitOneCount;
+            }
+            else if(currentDigit == 2)
+            {
+                digitTwoCount++;
+                currentDigitCount = digitTwoCount;
+            }
+            else if(currentDigitCount == 3)
+            {
+                digitThreeCount++;
+                currentDigitCount = digitThreeCount;
+            }
+            else if(currentDigitCount == 4)
+            {
+                digitFourCount++;
+                currentDigitCount = digitFourCount;
+            }
+            else if(currentDigitCount == 5)
+            {
+                digitFiveCount++;
+                currentDigitCount = digitFiveCount;
+            }
+            else if(currentDigitCount == 6)
+            {
+                digitSixCount++;
+                currentDigitCount = digitSixCount;
+            }
+            else if(currentDigitCount == 7)
+            {
+                digitSevenCount++;
+                currentDigitCount = digitSevenCount;
+            }
+            else if(currentDigitCount == 8)
+            {
+                digitEightCount++;
+                currentDigitCount = digitEightCount;
+            }
+            else
+            {
+                digitNineCount++;
+                currentDigitCount = digitNineCount;
+            }
+
+            if(currentDigitCount > o_BiggestCountOfAppearancesRecorded)
+            {
+                o_BiggestCountOfAppearancesRecorded = currentDigitCount;
+                o_MostFrequentDigit = currentDigit;
             }
 
             number = number / 10;
         }
-
-        Console.WriteLine("- Most Frequent Digit: {0} | Times counted: {1}", mostFrequentDigit, biggestCountOfAppearancesRecorded);
     }
 
     private int getFirstDigitInNumber()
