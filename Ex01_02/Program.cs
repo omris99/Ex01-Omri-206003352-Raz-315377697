@@ -12,11 +12,13 @@ namespace Ex01_02
 
         public static void Main()
         {
-            PrintTree(6);
+            PrintTree(7);
         }
 
         public static void PrintTree(int i_Height)
         {
+            int treePartHeight = i_Height - 2;
+            int maxRowLength = 2 * (treePartHeight - 1) + 1;
             if (i_Height < k_MinHeight || i_Height > k_MaxHeight)
             {
                 Console.WriteLine("Invalid height. Please enter a number between 4 and 15.");
@@ -24,10 +26,6 @@ namespace Ex01_02
             }
 
             m_CurrentNumber = 1;
-
-            int treePartHeight = i_Height - 2;
-            int maxRowLength = 2 * (treePartHeight - 1) + 1;
-
             PrintLineRecursive(0, treePartHeight, maxRowLength);
             PrintTrunk((char)('A' + treePartHeight), maxRowLength);
             PrintTrunk((char)('A' + treePartHeight + 1), maxRowLength);
@@ -40,13 +38,13 @@ namespace Ex01_02
                 return;
             }
 
-            int rowLength = 2 * i_RowIndex + 1;
+            int rowLength = (2 * i_RowIndex) + 1;
             int numOfPaddingSpacesForNumbers = i_MaxRowLength - rowLength;
             char label = (char)('A' + i_RowIndex);
             string numbersRow = BuildRowString(rowLength, ref m_CurrentNumber);
             string formattedRow = string.Format("{0}{1}{2}\n", label, new string(' ', numOfPaddingSpacesForNumbers + k_NumOfSpacesBetweenLabelAndNumbers + 1), numbersRow);
-            Console.WriteLine(formattedRow);
 
+            Console.WriteLine(formattedRow);
             PrintLineRecursive(i_RowIndex + 1, i_TotalRows, i_MaxRowLength);
         }
 
@@ -54,6 +52,7 @@ namespace Ex01_02
         {
             int numOfPaddingSpacesForTrunk = i_MaxRowLength - 1;
             string trunk = string.Format("{0}{1}|{2}|\n", i_Label, new string(' ', numOfPaddingSpacesForTrunk + k_NumOfSpacesBetweenLabelAndNumbers), m_CurrentNumber);
+            
             Console.WriteLine(trunk);
         }
 
