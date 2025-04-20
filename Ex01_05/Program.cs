@@ -147,58 +147,51 @@ public class Program
         while(number > 0)
         {
             currentDigit = number % 10;
-            if(currentDigit == 0)
+            switch (currentDigit)
             {
-                digitZeroCount++;
-                currentDigitCount = digitZeroCount;
-            }
-            else if(currentDigit == 1)
-            {
-                digitOneCount++;
-                currentDigitCount = digitOneCount;
-            }
-            else if(currentDigit == 2)
-            {
-                digitTwoCount++;
-                currentDigitCount = digitTwoCount;
-            }
-            else if(currentDigitCount == 3)
-            {
-                digitThreeCount++;
-                currentDigitCount = digitThreeCount;
-            }
-            else if(currentDigitCount == 4)
-            {
-                digitFourCount++;
-                currentDigitCount = digitFourCount;
-            }
-            else if(currentDigitCount == 5)
-            {
-                digitFiveCount++;
-                currentDigitCount = digitFiveCount;
-            }
-            else if(currentDigitCount == 6)
-            {
-                digitSixCount++;
-                currentDigitCount = digitSixCount;
-            }
-            else if(currentDigitCount == 7)
-            {
-                digitSevenCount++;
-                currentDigitCount = digitSevenCount;
-            }
-            else if(currentDigitCount == 8)
-            {
-                digitEightCount++;
-                currentDigitCount = digitEightCount;
-            }
-            else
-            {
-                digitNineCount++;
-                currentDigitCount = digitNineCount;
+                case 0:
+                    digitZeroCount++;
+                    currentDigitCount = digitZeroCount;
+                    break;
+                case 1:
+                    digitOneCount++;
+                    currentDigitCount = digitOneCount;
+                    break;
+                case 2:
+                    digitTwoCount++;
+                    currentDigitCount = digitTwoCount;
+                    break;
+                case 3:
+                    digitThreeCount++;
+                    currentDigitCount = digitThreeCount;
+                    break;
+                case 4:
+                    digitFourCount++;
+                    currentDigitCount = digitFourCount;
+                    break;
+                case 5:
+                    digitFiveCount++;
+                    currentDigitCount = digitFiveCount;
+                    break;
+                case 6:
+                    digitSixCount++;
+                    currentDigitCount = digitSixCount;
+                    break;
+                case 7:
+                    digitSevenCount++;
+                    currentDigitCount = digitSevenCount;
+                    break;
+                case 8:
+                    digitEightCount++;
+                    currentDigitCount = digitEightCount;
+                    break;
+                case 9:
+                    digitNineCount++;
+                    currentDigitCount = digitNineCount;
+                    break;
             }
 
-            if(currentDigitCount > o_BiggestCountOfAppearancesRecorded)
+            if (currentDigitCount > o_BiggestCountOfAppearancesRecorded)
             {
                 o_BiggestCountOfAppearancesRecorded = currentDigitCount;
                 o_MostFrequentDigit = currentDigit;
