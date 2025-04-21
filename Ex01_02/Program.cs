@@ -17,8 +17,8 @@ namespace Ex01_02
 
         public static void PrintTree(int i_Height)
         {
-            int treePartHeight = i_Height - 2;
-            int maxRowLength = 2 * (treePartHeight - 1) + 1;
+            int heightWithoutTrunk = i_Height - 2;
+            int maxRowLength = 2 * (heightWithoutTrunk - 1) + 1;
             if (i_Height < k_MinHeight || i_Height > k_MaxHeight)
             {
                 Console.WriteLine("Invalid height. Please enter a number between 4 and 15.");
@@ -26,9 +26,9 @@ namespace Ex01_02
             }
 
             m_CurrentNumber = 1;
-            PrintLineRecursive(0, treePartHeight, maxRowLength);
-            PrintTrunk((char)('A' + treePartHeight), maxRowLength);
-            PrintTrunk((char)('A' + treePartHeight + 1), maxRowLength);
+            PrintLineRecursive(0, heightWithoutTrunk, maxRowLength);
+            PrintTrunk((char)('A' + heightWithoutTrunk), maxRowLength);
+            PrintTrunk((char)('A' + heightWithoutTrunk + 1), maxRowLength);
         }
 
         private static void PrintLineRecursive(int i_RowIndex, int i_TotalRows, int i_MaxRowLength)
@@ -56,14 +56,14 @@ namespace Ex01_02
             Console.WriteLine(trunk);
         }
 
-        private static string BuildRowString(int i_NumOfValues, ref int io_CurrentNumber)
+        private static string BuildRowString(int i_NumberOfDigitsInRow, ref int io_CurrentNumber)
         {
             StringBuilder rowBuilder = new StringBuilder();
 
-            for (int i = 0; i < i_NumOfValues; i++)
+            for (int i = 0; i < i_NumberOfDigitsInRow; i++)
             {
                 rowBuilder.Append(io_CurrentNumber);
-                if (i < i_NumOfValues - 1)
+                if (i < i_NumberOfDigitsInRow - 1)
                 {
                     rowBuilder.Append(' ');
                 }
@@ -79,3 +79,4 @@ namespace Ex01_02
         }
     }
 }
+ 
