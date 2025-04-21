@@ -42,7 +42,7 @@ class Program
     private void printStatistics()
     {
         calculateAndPrintDecimalAverage();
-        findAndPrintTheLongestOnesSequenceLegnth();
+        findAndPrintTheLongestOnesSequenceLength();
         findAndPrintNumberOfExchangesBetweenZeroAndOneForEachNumber();
         findAndPrintNumberWithMostOnesCount();
         countAndPrintTheTotalNumberOfOnesAppearsInGroupNumbers();
@@ -179,7 +179,7 @@ class Program
         return quantityOfExchangesBetweenZeroesAndOnes;
     }
 
-    private void findAndPrintTheLongestOnesSequenceLegnth()
+    private void findAndPrintTheLongestOnesSequenceLength()
     {
         int currentOnesSequenceLength;
         int longestOnesSequenceLength = 0;

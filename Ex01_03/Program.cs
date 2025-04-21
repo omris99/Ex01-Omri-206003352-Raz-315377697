@@ -11,9 +11,8 @@ public class Program
         int selectedTreeHeight = -1;
         bool isValidInput = false;
 
-        Console.WriteLine("Enter tree height ({0}-{1}): ", k_MinTreeHeight, k_MaxTreeHeight);
+        Console.Write("Enter tree height ({0}-{1}): ", k_MinTreeHeight, k_MaxTreeHeight);
         string userInput = Console.ReadLine();
-
         while(isValidInput == false)
         {
             if(int.TryParse(userInput, out selectedTreeHeight) == false)

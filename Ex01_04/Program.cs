@@ -2,7 +2,7 @@
 public class Program
 {
     private string m_InputNumber;
-    private int k_StringLength = 4;
+    private int k_StringLength = 12;
 
     public static void Main()
     {

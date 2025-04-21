@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Diagnostics.PerformanceData;
 using System.Text;
 
 public class Program
 {
     private int m_Number;
     private const int k_NumberValidLength = 8;
+    private int m_CountOfLeadingZeroesInNumber;
 
     public static void Main()
     {
@@ -36,9 +38,11 @@ public class Program
                 break;
             }
 
-            Console.WriteLine("Please enter an integer with exactly {0} digits: ", k_NumberValidLength);
+            Console.WriteLine("\nPlease enter an integer with exactly {0} digits: ", k_NumberValidLength);
             input = Console.ReadLine();
         }
+
+        updateCountOfLeadingZeroesInNumber();
     }
 
     public void PrintStatistics()
@@ -100,6 +104,12 @@ public class Program
 
             number = number / 10;
         }
+        
+        for(int i = 0; i < m_CountOfLeadingZeroesInNumber; i++)
+        {
+            counterOfDigitsWhichDividesByThreeWithoutRemainder++;
+            digitsDividesByThreeWithoutRemainder.Append("0" + seperator);
+        }
 
         Console.WriteLine("- Digits which divides by 3 without remainder: {0} | Total Count: {1}",
             digitsDividesByThreeWithoutRemainder.ToString().TrimEnd(','), counterOfDigitsWhichDividesByThreeWithoutRemainder);
@@ -144,7 +154,13 @@ public class Program
 
         o_BiggestCountOfAppearancesRecorded = 0;
         o_MostFrequentDigit = 0;
-        while(number > 0)
+        for(int i = 0; i < m_CountOfLeadingZeroesInNumber; i++)
+        {
+            digitZeroCount++;
+            o_BiggestCountOfAppearancesRecorded = digitZeroCount;
+        }
+
+        while (number > 0)
         {
             currentDigit = number % 10;
             switch (currentDigit)
@@ -217,6 +233,11 @@ public class Program
         o_MaxDigit = currentDigit;
         o_MinDigit = currentDigit;
         number = number / 10;
+        if (m_CountOfLeadingZeroesInNumber > 0)
+        {
+            o_MinDigit = 0;
+        }
+
         while (number > 0)
         {
             currentDigit = number % 10;
@@ -231,6 +252,20 @@ public class Program
             }
 
             number = number / 10;
+        }
+    }
+
+    private void updateCountOfLeadingZeroesInNumber()
+    {
+        int lengthOfNumberAsInt = m_Number.ToString().Length;
+
+        if(m_Number == 0)
+        {
+            m_CountOfLeadingZeroesInNumber = k_NumberValidLength;
+        }
+        else
+        {
+            m_CountOfLeadingZeroesInNumber = (k_NumberValidLength - lengthOfNumberAsInt);
         }
     }
 }
